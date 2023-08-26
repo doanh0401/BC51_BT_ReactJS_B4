@@ -1,0 +1,1 @@
+export const XOA_GHE = "XOA_GHE";
