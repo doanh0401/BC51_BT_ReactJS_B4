@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { xoaGheAction } from "../../store/actions/xoaGheAction";
+import { thanhToanAction } from "../../store/actions/datGheAction";
 
 class Detail extends Component {
 
   renderContent = () => {
-    return this.props.danhSachGhe.map((element) => {
+    return this.props.buyTickets.map((element) => {
       return (<tr key={element.soGhe}>
         <td>{element.soGhe}</td>
         <td>{element.gia.toLocaleString()}</td>
@@ -16,7 +17,7 @@ class Detail extends Component {
 
   total = () => {
     let total = 0;
-    for(const element of this.props.danhSachGhe) {
+    for(const element of this.props.buyTickets) {
       total += element.gia;
     }
     return total;
@@ -43,8 +44,8 @@ class Detail extends Component {
             {this.renderContent()}
             <tr id="total">
               <td>Thành tiền</td>
-              <td>{this.total( ).toLocaleString()}</td>
-              <td></td>
+              <td>{this.total().toLocaleString()}</td>
+              <td><button onClick={() => this.props.dispatch(thanhToanAction())}>Thanh toán</button></td>
             </tr>
           </tbody>
         </table>
@@ -54,7 +55,8 @@ class Detail extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    danhSachGhe: state.datGheReducer.buyTickets,
+    buyTickets: state.datGheReducer.buyTickets,
+    danhSachGhe: state.datGheReducer.danhSachGhe
   };
 }
 
