@@ -1,6 +1,7 @@
 import { combineReducers,createStore } from "redux";
 import { datGheReducer } from "./reducers/datGheReducer";
 
+
 const rootReducer = combineReducers({
     datGheReducer,
 });

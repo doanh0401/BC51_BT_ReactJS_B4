@@ -1,5 +1,5 @@
 import data from "../../data/DanhSachGhe.json";
-import { DAT_GHE } from "../types/datGheType";
+import { DAT_GHE, THANH_TOAN } from "../types/datGheType";
 import { XOA_GHE } from "../types/xoaGheType";
 
 const DEFAULT_STATE = {
@@ -72,6 +72,21 @@ export const datGheReducer = (state = DEFAULT_STATE, action) => {
       state.buyTickets = tempdata;
       state.danhSachGhe = data;
       break;
+    }
+    case THANH_TOAN: {
+      const data = JSON.parse(JSON.stringify(state.danhSachGhe));
+
+      for (const hang of data) {
+        for (const ghe of hang.danhSachGhe) {
+          if (ghe.DangChon) {
+            ghe.daDat = !ghe.daDat;
+            ghe.DangChon = !ghe.DangChon;
+          }
+        }
+      }
+
+      state.buyTickets = [];
+      state.danhSachGhe = data;
     }
   }
 
